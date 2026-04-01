@@ -1,25 +1,17 @@
-# Data Engineering & Financial Intelligence Portfolio
+# Financial Analytics & Risk Portfolio
 
-This repository contains an end-to-end SQL-based analytics ecosystem. It leverages **Medallion Architecture** to solve two distinct industrial challenges: **Behavioral Risk Mitigation** (Bot Detection) and **Credit Card Transaction Intelligence** (Financial Growth & Lifecycle Modeling).
-
----
-
-## 🚀 Core Technical Stack
-* **Database:** Microsoft SQL Server (T-SQL)
-* **Data Orchestration:** Python (Pandas, NumPy) for synthetic high-volume generation.
-* **Advanced SQL:** Window Functions (`RANK`, `LAG`, `SUM OVER`), CTEs, Medallion ETL, and Statistical Baselines.
+This repository contains two independent strategic analytics modules. These projects solve high-stakes financial challenges through advanced data modeling, pattern detection, and business intelligence.
 
 ---
 
-## 🛡️ Project 1: Behavioral Risk & Anomaly Pipeline
-**Objective:** Detect coordinated bot networks and fraud rings within high-volume application logs.
+## 🛡️ Project 1: Behavioral Risk & Anomaly Detection
+**Objective:** Identify and mitigate coordinated bot networks and fraudulent activity within high-volume environments.
 
-### Architecture & Logic
-1.  **Bronze (Raw):** Ingestion of 55,000+ raw events using optimized `BULK INSERT`.
-2.  **Silver (Clean):** * **Deduplication:** Utilized `ROW_NUMBER()` to eliminate redundant registrations.
-    * **Integrity:** Enforced `INNER JOIN` logic to purge orphaned event logs.
-3.  **Gold (Analytics):** * **Risk Baselines:** Established 14-day rolling historical averages using `AVG(...) OVER(...)`.
-    * **Bot Detection:** Applied `CASE` logic to flag regional spikes exceeding 10x the norm.
+### Analytical Logic
+* **Integrity Validation:** Standardized 55,000+ raw activity logs to ensure data accuracy for risk modeling.
+* **Behavioral Baselines:** Established 14-day rolling historical averages using `AVG(...) OVER(...)` to identify "normal" user behavior.
+* **Anomaly Detection:** Developed logic to automatically flag regional activity spikes exceeding 10x the norm, isolating coordinated bot attacks.
+* **Velocity Tracking:** Identified "Rapid-Fire" actions and "Burner Accounts" that executed high-value tasks within 60 seconds of account creation.
 
 ---
 
@@ -28,18 +20,21 @@ This repository contains an end-to-end SQL-based analytics ecosystem. It leverag
 
 ### Key Business Use Cases
 * **Market Share Analysis:** Identified top 5 cities by spend and calculated their percentage contribution to global revenue.
-* **Milestone Tracking:** Engineered a cumulative spend model using `SUM(...) OVER(...)` to trigger alerts when a card tier reaches a **1,000,000 unit threshold**.
-* **Growth Analytics:** Implemented `LAG()` window functions to identify the highest **Month-over-Month (MoM) growth** segments.
-* **Customer Velocity:** Calculated "Acquisition Velocity" by measuring the `DATEDIFF` between a city's 1st and 500th transaction.
+* **Milestone Tracking:** Engineered a cumulative spend model using `SUM(...) OVER(...)` to identify exactly when a cardholder reaches a **1,000,000 unit spend threshold**.
+* **Growth Analytics:** Analyzed **Month-over-Month (MoM) growth** segments using `LAG()` functions to identify high-performing card tiers and expense categories.
+* **Acquisition Velocity:** Measured the time taken for new markets to reach 500 transactions using `DATEDIFF` and `ROW_NUMBER()`.
 
 ---
 
 ## 📂 Repository Structure
 
 ```text
-├── 01_Data_Generation          # Python scripts for synthetic data
-├── 02_Bronze_Layer             # Raw table DDL and Bulk Load scripts
-├── 03_Silver_Layer             # ETL, Cleansing, and Deduplication
-├── 04_Gold_Layer               # Risk Views and Statistical Baselines
-├── 05_Advanced_Analytics       # Bot velocity and "Burner Account" detection
-└── 06_Credit_Card_Case_Study   # Financial growth & milestone queries
+├── 01_Behavioral_Risk_Module       # Project 1: Anomaly Detection & Risk Suite
+│   ├── 01_Data_Generation
+│   ├── 02_Bronze_Layer
+│   ├── 03_Silver_Layer
+│   ├── 04_Gold_Layer
+│   └── 05_Advanced_Analytics
+└── 02_Credit_Card_Analytics_Module # Project 2: Financial Intelligence Suite
+    ├── 01_table_definitions.sql
+    └── 02_business_insight_queries.sql
